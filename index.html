@@ -3,11 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tennis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+
+    <title>Динамические секции</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/9.0.1/swiper-bundle.min.css">
     
 </head>
 <body>
+
+    <script src="core.js"></script>
+
+
+    <section class="layers">
+		<div class="layers__container">
+			<div class="layers__item layer-1" style="background-image: url(img/layer-1.jpg);"></div>
+			<div class="layers__item layer-2" style="background-image: url(img/layer-2.png);"></div>
+			<div class="layers__item layer-3">
+				<div class="hero-content">
+					<h1>Петербургский теннисный клуб имени М.А. Пасечникова</h1>
+					
+					<button id="playVideoButton" class="button-start">Посмотрите видео о нашем клубе</button>
+				</div>
+			</div>
+			<div class="layers__item layer-4">
+				<canvas class="rain"></canvas>
+			</div>
+			<div class="layers__item layer-5" style="background-image: url(img/layer-5.png);"></div>
+			<!-- <div class="layers__item layer-6" style="background-image: url(img/layer-6.png);"></div> -->
+		</div>
+	</section>
+
+    <div class="video-overlay" id="videoOverlay">
+        <video id="videoPlayer" controls>
+            <source src="tennis.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <button class="close-btn" id="closeVideo">×</button>
+    </div>
+    <script>
+        const videoOverlay = document.getElementById('videoOverlay');
+        const videoPlayer = document.getElementById('videoPlayer');
+        const playButton = document.getElementById('playVideoButton');
+        const closeButton = document.getElementById('closeVideo');
+    
+        playButton.addEventListener('click', (e) => {
+            e.preventDefault(); 
+            videoOverlay.style.display = 'flex'; 
+            videoPlayer.play(); 
+        });
+    
+        
+        closeButton.addEventListener('click', () => {
+            videoOverlay.style.display = 'none'; 
+            videoPlayer.pause(); 
+            videoPlayer.currentTime = 0;
+        });
+        closeButton.click()
+    </script>
 
     <div id="app"></div>
 
@@ -17,12 +73,12 @@
 
         // Данные для секций
         const trainers = [
-            { name: 'Pulvinar aliquam', description: 'Arcu elit massa amet turpis vel consequat pellentesque sit. ', image: '' },
-            { name: 'Pretium odio', description: 'Bibendum aliquam volutpat nisl a duis in nisi. In sed commodo lorem morbi quis. ', image: '' },
-            { name: 'Aliquet consectetur', description: 'Id sapien sed nibh fermentum massa posuere ipsum. Diam in.', image: '' },
-            { name: 'Blandit augue', description: 'Scelerisque accumsan pretium justo, vitae elit. Dolor semper morbi sit auctor vel diam eros.', image: '' },
-            { name: 'Lorem lacus', description: 'Adipiscing amet, viverra dignissim egestas. Sed nibh egestas venenatis faucibus. ', image: '' },
-            { name: 'Sed erat', description: 'Quis ullamcorper pretium lacus risus tellus dolor etiam. ', image: '' },
+            { name: 'Pulvinar aliquam', description: 'Arcu elit massa amet turpis vel consequat pellentesque sit. ', image: './img/person-1.jpg' },
+            { name: 'Pretium odio', description: 'Bibendum aliquam volutpat nisl a duis in nisi. In sed commodo lorem morbi quis. ', image: './img/person-2.jpg' },
+            { name: 'Aliquet consectetur', description: 'Id sapien sed nibh fermentum massa posuere ipsum. Diam in.', image: './img/person-3.jpg' },
+            { name: 'Blandit augue', description: 'Scelerisque accumsan pretium justo, vitae elit. Dolor semper morbi sit auctor vel diam eros.', image: './img/person-4.jpg' },
+            { name: 'Lorem lacus', description: 'Adipiscing amet, viverra dignissim egestas. Sed nibh egestas venenatis faucibus. ', image: './img/person-5.jpg' },
+            { name: 'Sed erat', description: 'Quis ullamcorper pretium lacus risus tellus dolor etiam. ', image: './img/person-6.jpg' },
         ];
 
         const accordionItems = [
@@ -32,12 +88,17 @@
             { title: 'Дополнительные услуги', content: 'Контент для услуг.' },
         ];
 
+        const images = [
+            { src: 'img/cafe.png', description: 'Уютное каффе' },
+            // { src: '', description: 'Описание 2' },
+            // { src: '', description: 'Описание 3' }
+        ];
 
         
         const trainersSection = document.createElement('div');
         trainersSection.classList.add('section');
         trainersSection.innerHTML = `
-            <h2>Тренерский состав</h2>
+            <h2 class="trainers">Тренерский состав</h2 >
             <div class="swiper">
                 <div class="swiper-wrapper">
                     ${trainers.map(trainer => `
@@ -55,6 +116,9 @@
         app.appendChild(trainersSection);
 
         
+        const container = document.createElement('div');
+        container.classList.add('content-container');
+
         const accordionSection = document.createElement('div');
         accordionSection.classList.add('section');
         accordionSection.innerHTML = `
@@ -72,13 +136,43 @@
         `;
         app.appendChild(accordionSection);
 
-        
         document.querySelectorAll('.accordion-title').forEach(title => {
             title.addEventListener('click', () => {
                 const content = title.nextElementSibling;
                 content.classList.toggle('open');
                 content.style.maxHeight = content.classList.contains('open') ? content.scrollHeight + 'px' : '0';
             });
+        });
+
+        const imageSwiperSection = document.createElement('div');
+        imageSwiperSection.classList.add('section', 'swiper-small-section');
+        imageSwiperSection.innerHTML = `
+            <h2 class="services">Услуги</h2>
+            <div class="swiper small-swiper">
+                <div class="swiper-wrapper">
+                    ${images.map(image => `
+                        <div class="swiper-slide2">
+                            <img src="${image.src}" alt="${image.description}">
+                            <p>${image.description}</p>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="swiper-button-next small-next"></div>
+                <div class="swiper-button-prev small-prev"></div>
+            </div>
+        `;
+
+        container.appendChild(accordionSection);
+        container.appendChild(imageSwiperSection);
+        app.appendChild(container);
+
+        new Swiper('.small-swiper', {
+            navigation: {
+                nextEl: '.small-next',
+                prevEl: '.small-prev',
+            },
+            slidesPerView: 1,
+            spaceBetween: 10,
         });
 
         
@@ -90,33 +184,37 @@
             slidesPerView: 3,
             spaceBetween: 20,
         });
-
-
-        
     </script>
 
 </body>
 </html>
 
 <style>
+        *{  font-family: "Rubik", serif; }
         body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+        h3 { font-weight: 600; height: 21px; }
         #app { width: 90%; margin: auto; }
         .section { margin-bottom: 50px; }
-        .swiper { width: 100%; padding: 20px 0; }
-        .swiper-slide { display: flex; flex-direction: column; align-items: center; }
-        p {width: 220px; text-align: center;}
-        .swiper-slide img { width: 150px; border-radius: 8px; }
+        h2{ margin-bottom: 75px; font-weight: 700; height: 36px;  }
+        .swiper { width: 100%; height: 623px; ; padding: 20px 0; padding-top: 75px; }
+        .swiper-slide { display: flex; flex-direction: column; justify-content: center; align-items: center;  }
+        p { font-weight: 400; height: 14px; text-align: center; width: 196px; }
+        .swiper-slide img { width: 150px; border-radius: 8px; justify-content: center; ; align-items: center }
         .accordion {; overflow: hidden; margin-top: 20px; width: 526px; }
         .accordion-item { border-bottom: 1px solid #ddd; margin-bottom: 30px; color: #fff; }
         .accordion-item:last-child { border-bottom: none; }
         .accordion-title { background-color: #8D86C9; padding: 15px; cursor: pointer; display: flex; justify-content: space-between; }
         .accordion-content { max-height: 0; overflow: hidden; padding: 0 15px; transition: max-height 0.3s ease; color: #8D86C9; }
         .accordion-content.open { max-height: 200px; padding: 15px; }
-        .swiper-button-next { color: #fff; background: rgba(141, 134, 201, 1.0); width: 45px; height: 45px; position: absolute ; top: 2%; left: 90%; } 
-        .swiper-button-prev { color: #fff; background: rgba(141, 134, 201, 1.0); width: 45px; height: 45px; position: absolute ; top: 2%; left: 80%; } 
+        .swiper-button-next { color: #fff; background: rgba(141, 134, 201, 1.0); width: 45px; height: 45px; position: absolute ; top: 4%; left: 88%; } 
+        .swiper-button-prev { color: #fff; background: rgba(141, 134, 201, 1.0); width: 45px; height: 45px; position: absolute ; top: 4%; left: 81%; } 
         .swiper-button-next::after,
         .swiper-button-prev::after { display: none;}
         .swiper-button-next::before { content: url(Vector\ \(14\).svg); }
         .swiper-button-prev::before { content: url(Vector\ \(15\).svg); } 
+        .container { display: flex; }
+        .small-swiper{ width: 636px; height: 455px;  margin-left: 700px; margin-top: -400px; }
+        .swiper-slide2{ width: 636px; height: 330px;  }
         
     </style>
+
