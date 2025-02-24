@@ -153,9 +153,7 @@ width: 300px;
 }
 
 .services{
-    position: absolute;
-    transform: translateX(700px);
-    top: 1534px;
+
 }
 
 .video-overlay {
@@ -206,7 +204,7 @@ width: 300px;
 .small-swiper p {
     position: absolute;
     bottom: 70px;
-    left: 15px;
+    left: 55px;
     color: #fff;
     font-weight: 700;
     height: 27px;
