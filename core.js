@@ -6,3 +6,11 @@ document.addEventListener('mousemove', e => {
 		`
 	})
 })
+
+document.querySelectorAll("nav-item").forEach(item => {
+	item.addEventListener("mouseover", () => {
+		let audio = document.getElementById("hover-sound");
+		audio.currentTime = 0; 
+		audio.play();
+	});
+});
