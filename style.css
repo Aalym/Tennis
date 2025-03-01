@@ -255,3 +255,46 @@ h1{
     font-weight: 700;
     font-size: 18px;
 }
+
+
+
+
+.footer_in {
+	background-color: #F7ECE1;
+	width: 100%;
+	margin-top: 10%;
+	display: flex;
+	}
+	.footer-item{
+		display: flex;
+	}
+	.footer-tennis_footer-tit{
+	color: #575555;
+	padding: 3px 312px 0 228px;
+	font-weight: 500;
+	font-size: 14px;
+	white-space: nowrap;
+	
+	}
+	.footer-list{
+	display: flex;
+	margin: 0 20px 0 0;
+    font-size: 14px;
+	}
+	.footer-list:hover,.footer-list:focus,.footer-list:active{
+		opacity: .65;
+	}
+	.ft_link{
+		display: flex;
+		margin-top: 30px;
+		align-items: center;
+		margin-left: 110px;
+		font-family: 'Gilroy';
+		font-size: 14px;
+		  color: #333333;
+		
+	}
+	.footer-link{
+		margin: 0 9px 30px 0;
+		padding-right: 22px;
+	}
