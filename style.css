@@ -142,17 +142,50 @@ header{
 }
 
 
+.cards {
+	margin: 150px 129px 0;
+}
+.flex{
+	align-items: center;
+}
+.card{
+	margin-right: 24px;
+	width: 396px;
+	height: 470px;
+	background: #ffffff;
+	border: 1px solid #F7ECE1;
+	padding: 25px;
+}
+.card-club-img{
+	background: url(../img/tennis-1.png) center no-repeat;
+	background-size: cover;
+	width: 347px;
+	height: 420px;
+
+}
+.card-tennis-img{
+	background: url(../img/tennis-2.png)  center no-repeat;
+	background-size: cover;
+	width: 347px;
+	height: 420px;
+}
+.card-tenn-img{
+	background: url(../img/tennis-3.png) center no-repeat;
+	background-size: cover;
+	width: 347px;
+	height: 420px;
+}
+
+.tennis-txt{
+	color: #ffffff;
+	font-size: 27px;
+	font-weight: 700;
+	padding: 305px  10px 0;
+	text-align: center;
+	line-height: 37px;
+}
 
 
-.first {
-    background-image: url(img/playZone1.jpg);
-}
-.second {
-    background-image: url(img/playZone2.jpg);
-}
-.third {
-    background-image: url(img/playZone3.jpg);
-}
 
 h1{
 	font-weight: 400;
